@@ -1,0 +1,49 @@
+## Sorting in Python with Dictionary as input 
+
+### referral link : https://www.geeksforgeeks.org/sorted-function-python/
+'''
+Sorted() function in Python
+Sorting any sequence is very easy in Python using built-in method sorted() which does all the hard work for you.
+Sorted() sorts any sequence (list, tuple) and always returns a list with the elements in sorted manner, without modifying the original sequence.
+
+Syntax : sorted(iterable, key, reverse)
+
+Parameters : sorted takes three parameters from which two are optional.
+
+Iterable : sequence (list, tuple, string) or collection (dictionary, set, frozenset) or any other iterator that needs to be sorted.
+Key(optional) : A function that would server as a key or a basis of sort comparison.
+Reverse(optional) : If set true, then the iterable would be sorted in reverse (descending) order, by default it is set as false.
+'''
+
+vm_cloud = {"bvm1":20,"cvm2":50,"avm3":30,"dvm4":70} 
+vm_cloud_nested = {"bvm1":{"pri": 20},"cvm2":{"pri": 50},"avm3":{"pri": 30},"dvm4":{"pri": 70}}
+vm_cloud_nested_2 = {"bvm1":{"pri": 20,"size":30},"cvm2":{"pri": 50,"size":20},
+                     "avm3":{"pri": 30,"size":40},"dvm4":{"pri": 70,"size":80}}
+
+print("sorting dict based on value")
+print("=====sorted function returning dictionary========")
+print(sorted(vm_cloud.items(),key=lambda kvalue : kvalue[1]))
+print(sorted(vm_cloud_nested.items(),key=lambda kvalue : kvalue[1]['pri']))
+print(sorted(vm_cloud_nested_2.items(),key=lambda kvalue : kvalue[1]['size']))
+
+print("======sorted function returning List========")
+print(sorted(vm_cloud,key=lambda kvalue : vm_cloud[kvalue]))
+print(sorted(vm_cloud_nested,key=lambda kvalue : vm_cloud_nested[kvalue]['pri']))
+
+print("sorting dict based on value")
+print(sorted(vm_cloud.values()))
+
+print("sorting dict - default -- lexicographically with keys")
+print(sorted(vm_cloud))
+
+print("sorted function with List as input and  with key as function")
+def func(x): 
+    return x % 7
+  
+L = [15, 3, 11, 7] 
+  
+print ("Normal sort :", sorted(L) )
+print ("Sorted with key:", sorted(L, key = func) )
+
+
+
