@@ -1,0 +1,21 @@
+Questions:
+
+'''
+There are n VM’s which make up an App, these VM’s are there on your local datacenter and you have to upload them to 
+cloud to get your app up. There is a limited amount of bandwidth available to upload these VM’s. 
+And these VM’s have a priority Order to boot up after they are uploaded,
+how would you upload these VM’s so that the App can come up in minimum time.
+'''
+
+Assumptions: 
+1. All vm sizes are given initially.
+2. For bandwidth measurement we should know that how much is the maximum threshold size is required 
+so as not to cog the network.
+
+
+Approach: 
+1. Find the list of vms with sorted sizes in ascending order.
+2. To make the efficient use of bandwidth , we will group the vm's in bunch whos size sum is cumulative to the maximum 
+threshold.
+3. After making the group of vms, we will upload them
+
