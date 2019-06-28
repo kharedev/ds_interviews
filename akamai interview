@@ -1,0 +1,149 @@
+Questions : 
+1. You are getting a stream of data flow , you have to store it and return it in sorted order as and when fetched by anyone. 
+    Which Data Structure should we use here and what will be your approach.
+    
+
+Answer 1: 
+============
+## refernce from Geeks for Geeks - https://www.geeksforgeeks.org/applications-of-bst/
+
+
+Applications of BST
+Binary Search Tree, is a node-based binary tree data structure which has the following properties:
+The left subtree of a node contains only nodes with keys lesser than the node’s key.
+The right subtree of a node contains only nodes with keys greater than the node’s key.
+The left and right subtree each must also be a binary search tree.
+There must be no duplicate nodes.
+
+
+
+A BST supports operations like search, insert, delete, floor, ceil, greater, smaller, etc in O(h) time where h is height of the BST. To keep height less, self balancing BSTs (like AVL and Red Black Trees) are used in practice. These Self-Balancing BSTs maintain the height as O(Log n). Therefore all of the above mentioned operations become O(Log n). Together with these, BST also allows sorted order traversal of data in O(n) time.
+
+A Self-Balancing Binary Search Tree is used to maintain sorted stream of data. For example, suppose we are getting online orders placed and we want to maintain the live data (in RAM) in sorted order of prices. For example, we wish to know number of items purchased at cost below a given cost at any moment. Or we wish to know number of items purchased at higher cost than given cost.
+A Self-Balancing Binary Search Tree is used to implement doubly ended priority queue. With a Binary Heap, we can either implement a priority queue with support of extractMin() or with extractMax(). If we wish to support both the operations, we use a Self-Balancing Binary Search Tree to do both in O(Log n)
+There are many more algorithm problems where a Self-Balancing BST is the best suited data structure, like count smaller elements on right, Smallest Greater Element on Right Side, etc.
+
+
+
+Answer 2:
+===========
+Can also use Max Heap for inplace insertion and sorting. 
+
+
+
+
+
+
+Question 2: 
+============
+You are given a large list of 0's and 1's , how will you sort this with all 0's on one side and 1's on other
+
+Answer:
+
+1. Tricky solution : (https://stackoverflow.com/questions/11175645/sort-a-list-efficiently-which-contains-only-0-and-1-without-using-any-builtin-py)
+==============
+
+>>> lst = [0,0,1,0,1,1,0]
+>>> l, s = len(lst), sum(lst)
+>>> result = [0] * (l - s) + [1] * s
+>>> result
+[0, 0, 0, 0, 1, 1, 1]
+
+2. Tricky Solution :
+
+def segregate(arr): 
+    res = ([x for x in arr if x==0] + [x for x in arr if x==1]) 
+    print(res) 
+    
+3. Dictionary Solution : 
+
+Method 1 (Count 0s or 1s) 
+Thanks to Naveen for suggesting this method.
+1) Count the number of 0s. Let count be C.
+2) Once we have count, we can put C 0s at the beginning and 1s at the remaining n – C positions in array.
+
+Time Complexity : O(n)
+
+ Python 3 code to Segregate 
+# 0s and 1s in an array 
+  
+# Function to segregate 0s and 1s 
+def segregate0and1(arr, n) : 
+      
+    # Counts the no of zeros in arr 
+    count = 0 
+  
+    for i in range(0, n) : 
+        if (arr[i] == 0) : 
+            count = count + 1
+  
+    # Loop fills the arr with 0 until count 
+    for i in range(0, count) : 
+        arr[i] = 0
+  
+    # Loop fills remaining arr space with 1 
+    for i in range(count, n) : 
+        arr[i] = 1
+          
+  
+# Function to print segregated array 
+def print_arr(arr , n) : 
+    print( "Array after segregation is ",end = "") 
+  
+    for i in range(0, n) : 
+        print(arr[i] , end = " ") 
+          
+  
+# Driver function 
+arr = [ 0, 1, 0, 1, 1, 1 ] 
+n = len(arr) 
+      
+segregate0and1(arr, n) 
+print_arr(arr, n) 
+  
+  
+          
+# This code is contributed by Nikita Tiwari. 
+
+Method 2 (Use two indexes to traverse)
+Maintain two indexes. Initialize first index left as 0 and second index right as n-1.
+
+Do following while left < right
+a) Keep incrementing index left while there are 0s at it
+b) Keep decrementing index right while there are 1s at it
+c) If left < right then exchange arr[left] and arr[right]
+
+Implementation:
+
+# Python program to sort a binary array in one pass 
+  
+# Function to put all 0s on left and all 1s on right 
+def segregate0and1(arr, size): 
+    # Initialize left and right indexes 
+    left, right = 0, size-1
+      
+    while left < right: 
+        # Increment left index while we see 0 at left 
+        while arr[left] == 0 and left < right: 
+            left += 1
+  
+        # Decrement right index while we see 1 at right 
+        while arr[right] == 1 and left < right: 
+            right -= 1
+  
+        # If left is smaller than right then there is a 1 at left 
+        # and a 0 at right. Exchange arr[left] and arr[right] 
+        if left < right: 
+            arr[left] = 0
+            arr[right] = 1
+            left += 1
+            right -= 1
+  
+    return arr 
+  
+# driver program to test 
+arr = [0, 1, 0, 1, 1, 1] 
+arr_size = len(arr) 
+print("Array after segregation") 
+print(segregate0and1(arr, arr_size))
+
